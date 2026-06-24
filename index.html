@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DominationEra | Minecraft Network</title>
+<meta name="description" content="DominationEra – the #1 competitive Minecraft network. Join now at mc.dominationera.site">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & BASE ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+:root {
+  --bg:          #06060D;
+  --bg2:         #09091A;
+  --surface:     #0C0C1E;
+  --card:        #0F0F22;
+  --card2:       #13132A;
+  --border:      #1E1E40;
+  --border2:     #2C2C55;
+
+  --red:         #E63946;
+  --red-glow:    rgba(230,57,70,.35);
+  --red-dim:     #6B1A22;
+
+  --gold:        #FFB700;
+  --gold-glow:   rgba(255,183,0,.30);
+  --gold-dim:    #6B4C00;
+
+  --purple:      #9B5DE5;
+  --purple-glow: rgba(155,93,229,.30);
+
+  --teal:        #00D4AA;
+  --teal-glow:   rgba(0,212,170,.25);
+
+  --blue:        #3A86FF;
+  --blue-glow:   rgba(58,134,255,.25);
+
+  --text:        #D0D0E8;
+  --text2:       #9090C0;
+  --white:       #F0F0FF;
+
+  --nav-h:       60px;
+  --ticker-h:    36px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ─── TICKER ──────────────────────────────────── */
+.ticker-wrap {
+  width: 100%;
+  height: var(--ticker-h);
+  background: var(--red);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.ticker-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker-scroll 28s linear infinite;
+}
+.ticker-inner span {
+  display: inline-block;
+  padding: 0 60px;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── NAV ─────────────────────────────────────── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  background: rgba(6,6,13,.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  padding: 0 4%;
+  gap: 2rem;
+}
+.nav-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.nav-logo em { color: var(--red); font-style: normal; }
+
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  margin-left: .5rem;
+}
+.nav-links a {
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text2);
+  transition: color .2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  flex-shrink: 0;
+}
+.nav-ip-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.nav-ip-badge:hover { border-color: var(--red); }
+.nav-ip-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 6px var(--teal);
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+.nav-ip-text {
+  font-family: 'Fira Code', monospace;
+  font-size: .72rem;
+  color: var(--text2);
+}
+.nav-discord {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: #5865F2;
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  transition: background .2s;
+}
+.nav-discord:hover { background: #4752C4; }
+.nav-play {
+  padding: 7px 20px;
+  background: var(--red);
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: background .2s, transform .15s;
+  white-space: nowrap;
+}
+.nav-play:hover { background: #FF4A55; transform: translateY(-1px); }
+
+/* ─── HERO ─────────────────────────────────────── */
+#hero {
+  position: relative;
+  min-height: calc(100vh - var(--nav-h) - var(--ticker-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 5% 80px;
+  overflow: hidden;
+}
+
+canvas#bg-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Vignette overlay */
+#hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--bg) 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 860px; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--teal);
+  padding: 5px 16px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1.5rem;
+  background: rgba(0,212,170,.07);
+}
+
+.hero-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 700;
+  line-height: .9;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: .4rem;
+}
+.hero-title span {
+  color: var(--red);
+  display: block;
+}
+
+.hero-line {
+  width: 80px;
+  height: 3px;
+  background: var(--red);
+  margin: 1.2rem auto;
+}
+
+.hero-sub {
+  font-size: clamp(.95rem, 2vw, 1.15rem);
+  color: var(--text2);
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/* IP Box */
+.hero-ip {
+  display: inline-flex;
+  align-items: stretch;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border2);
+  overflow: hidden;
+}
+.hero-ip-label {
+  padding: 11px 16px;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text2);
+  background: var(--card2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+}
+.hero-ip-value {
+  padding: 11px 22px;
+  font-family: 'Fira Code', monospace;
+  font-size: .85rem;
+  color: var(--gold);
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  user-select: all;
+}
+.hero-ip-copy {
+  padding: 11px 20px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.hero-ip-copy:hover { background: #FF4A55; }
+.hero-ip-copy.done { background: var(--teal); color: #000; }
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-red {
+  padding: 14px 38px;
+  background: var(--red);
+  color: #fff;
+  font-weight: 700;
+  font-size: .92rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background .2s, transform .15s;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn-red:hover { background: #FF4A55; transform: translateY(-2px); }
+.btn-ghost {
+  padding: 14px 38px;
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  font-size: .92rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  display: inline-block;
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--red); color: var(--red); }
+
+/* Scroll arrow */
+.hero-scroll {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.scroll-arrow {
+  width: 20px; height: 20px;
+  border-right: 2px solid var(--border2);
+  border-bottom: 2px solid var(--border2);
+  transform: rotate(45deg);
+  animation: scroll-bounce .9s ease-in-out infinite alternate;
+}
+@keyframes scroll-bounce { from { transform: rotate(45deg) translateY(-3px); } to { transform: rotate(45deg) translateY(4px); } }
+
+/* ─── STATS BAR ─────────────────────────────────── */
+.stats-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 2px solid var(--red);
+  padding: 22px 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+.stat-item {
+  text-align: center;
+  padding: 0 clamp(1.5rem, 4vw, 3.5rem);
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: .04em;
+}
+.stat-num .accent { color: var(--red); }
+.stat-lbl {
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin-top: 4px;
+}
+
+/* ─── SECTIONS SHARED ──────────────────────────── */
+section { padding: 80px 5%; }
+.section-inner { max-width: 1140px; margin: 0 auto; }
+
+.eyebrow {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: .5rem;
+}
+.sec-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: .8rem;
+}
+.sec-desc {
+  color: var(--text2);
+  font-size: .98rem;
+  line-height: 1.75;
+  max-width: 540px;
+}
+
+/* ─── GAME MODES ────────────────────────────────── */
+#modes { background: var(--bg2); }
+
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+.mode-card {
+  background: var(--card);
+  padding: 28px 26px;
+  position: relative;
+  overflow: hidden;
+  transition: background .25s;
+  cursor: default;
+}
+.mode-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--mode-color, var(--red));
+}
+.mode-card:hover {
+  background: var(--card2);
+}
+.mode-card:hover .mode-icon {
+  transform: scale(1.15);
+}
+
+.mode-icon {
+  font-size: 2.2rem;
+  margin-bottom: .9rem;
+  display: block;
+  transition: transform .25s;
+  line-height: 1;
+}
+.mode-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--white);
+  margin-bottom: .35rem;
+}
+.mode-desc {
+  color: var(--text2);
+  font-size: .88rem;
+  line-height: 1.6;
+  margin-bottom: .9rem;
+}
+.mode-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border: 1px solid var(--border2);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text2);
+}
+.mode-pill .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--mode-color, var(--red));
+}
+
+/* ─── RANKS ─────────────────────────────────────── */
+#ranks {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.ranks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+.rank-card {
+  background: var(--card);
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.rank-card.featured {
+  background: var(--card2);
+}
+.rank-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--rank-color);
+}
+.rank-featured-label {
+  position: absolute;
+  top: 14px; right: -24px;
+  background: var(--gold);
+  color: #000;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 4px 32px;
+  transform: rotate(40deg);
+}
+
+.rank-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 2px solid var(--rank-color);
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--rank-color);
+  margin-bottom: 1.2rem;
+  width: fit-content;
+}
+.rank-price {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: .3rem;
+}
+.rank-price sup {
+  font-size: 1.1rem;
+  vertical-align: top;
+  margin-top: .5rem;
+  color: var(--text2);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+.rank-period {
+  font-size: .78rem;
+  color: var(--text2);
+  margin-bottom: 1.6rem;
+  font-weight: 500;
+}
+.rank-features {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  margin-bottom: 2rem;
+}
+.rank-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .88rem;
+  color: var(--text2);
+  font-weight: 500;
+}
+.rank-feature .check {
+  color: var(--rank-color);
+  font-weight: 700;
+  font-size: .9rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.rank-feature.inactive { opacity: .3; }
+.rank-feature.inactive .check { color: var(--text2); }
+
+.rank-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--rank-color);
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: .88rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: filter .2s, transform .15s;
+  display: block;
+}
+.rank-btn:hover { filter: brightness(1.15); transform: translateY(-2px); }
+
+/* ─── FEATURES ──────────────────────────────────── */
+#features { background: var(--bg2); border-top: 1px solid var(--border); }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+}
+.feat-card {
+  background: var(--card);
+  padding: 32px 26px;
+  position: relative;
+  transition: background .2s;
+}
+.feat-card:hover { background: var(--card2); }
+.feat-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--border2);
+  line-height: 1;
+  margin-bottom: .2rem;
+  transition: color .25s;
+}
+.feat-card:hover .feat-num { color: var(--red); }
+.feat-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--white);
+  margin-bottom: .45rem;
+}
+.feat-desc { color: var(--text2); font-size: .88rem; line-height: 1.65; }
+
+/* ─── HOW TO JOIN ───────────────────────────────── */
+#join {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.join-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.steps { margin-top: 2.5rem; }
+.step {
+  display: flex;
+  gap: 1.4rem;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.step:first-child { border-top: 1px solid var(--border); }
+.step-n {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--border2);
+  line-height: 1;
+  min-width: 54px;
+  text-align: right;
+  transition: color .25s;
+  flex-shrink: 0;
+}
+.step:hover .step-n { color: var(--red); }
+.step-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--white);
+  margin-bottom: .3rem;
+}
+.step-desc { color: var(--text2); font-size: .88rem; line-height: 1.65; }
+.step-chip {
+  display: inline-block;
+  margin-top: .5rem;
+  padding: 4px 12px;
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  font-family: 'Fira Code', monospace;
+  font-size: .7rem;
+  color: var(--gold);
+}
+
+.join-card {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+.join-card-header {
+  padding: 18px 24px;
+  background: var(--red);
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.join-card-body { padding: 0; }
+.join-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+  font-size: .88rem;
+}
+.join-row:last-of-type { border-bottom: none; }
+.join-key {
+  color: var(--text2);
+  font-weight: 600;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.join-val {
+  font-weight: 700;
+  color: var(--white);
+  font-size: .88rem;
+}
+.online-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--teal);
+  font-weight: 700;
+}
+.join-cta-wrap {
+  padding: 20px 24px;
+  border-top: 1px solid var(--border);
+}
+.join-cta-btn {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  background: var(--red);
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: .88rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+}
+.join-cta-btn:hover { background: #FF4A55; }
+
+/* ─── VOTE ──────────────────────────────────────── */
+#vote {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.vote-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.vote-sites {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  margin-top: 2rem;
+}
+.vote-site {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+  text-decoration: none;
+  color: inherit;
+}
+.vote-site:hover {
+  background: var(--card2);
+  border-left-color: var(--gold);
+}
+.vote-site-name {
+  font-weight: 700;
+  font-size: .92rem;
+  color: var(--white);
+}
+.vote-site-sub {
+  font-size: .76rem;
+  color: var(--text2);
+  margin-top: 2px;
+}
+.vote-arrow {
+  color: var(--text2);
+  font-size: .9rem;
+  transition: transform .2s, color .2s;
+}
+.vote-site:hover .vote-arrow {
+  transform: translateX(4px);
+  color: var(--gold);
+}
+
+.vote-rewards { }
+.vote-reward-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--white);
+  margin-bottom: 1.4rem;
+}
+.reward-list {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.reward-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: .9rem;
+  color: var(--text2);
+}
+.reward-icon {
+  width: 36px; height: 36px;
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* ─── COMMUNITY ─────────────────────────────────── */
+#community {
+  background: var(--bg);
+  text-align: center;
+}
+.community-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.community-inner .sec-desc {
+  max-width: 100%;
+  margin: .6rem auto 2rem;
+}
+.community-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-discord {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  background: #5865F2;
+  color: #fff;
+  font-weight: 700;
+  font-size: .9rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background .2s;
+}
+.btn-discord:hover { background: #4752C4; }
+
+/* ─── FOOTER ─────────────────────────────────────── */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+.footer-top {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 56px 5% 40px;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+}
+.footer-brand-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--white);
+  margin-bottom: .5rem;
+}
+.footer-brand-name em { color: var(--red); font-style: normal; }
+.footer-brand-desc {
+  color: var(--text2);
+  font-size: .85rem;
+  line-height: 1.7;
+  max-width: 290px;
+  margin-bottom: 1.4rem;
+}
+.footer-social {
+  display: flex;
+  gap: .6rem;
+}
+.footer-social-link {
+  width: 34px; height: 34px;
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  color: var(--text2);
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.footer-social-link:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+.footer-col-title {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1.1rem;
+}
+.footer-links a {
+  display: block;
+  color: var(--text2);
+  font-size: .85rem;
+  padding: .32rem 0;
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--text); }
+
+.footer-bottom {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 20px 5%;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.footer-copy { color: var(--text2); font-size: .78rem; }
+.footer-domain {
+  font-family: 'Fira Code', monospace;
+  font-size: .65rem;
+  color: var(--border2);
+}
+
+/* ─── TOAST ─────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--teal);
+  color: #000;
+  padding: 10px 28px;
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+  z-index: 999;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ─── REVEAL ─────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .join-grid  { grid-template-columns: 1fr; }
+  .vote-inner { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .stats-bar  { gap: 0; }
+  .hero-ip    { flex-direction: column; }
+  .hero-ip-value { text-align: center; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── TICKER ─────────────────────────────────── -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span>🔥 Season 3 is NOW LIVE — new maps, new weapons & exclusive cosmetics</span>
+    <span>⚔️ Weekend Tournament — $50 prize pool — register on Discord</span>
+    <span>🏆 Top 3 Factions win exclusive LEGEND rank this season</span>
+    <span>🎉 500 players online — our biggest milestone yet! thank you!</span>
+    <span>🔥 Season 3 is NOW LIVE — new maps, new weapons & exclusive cosmetics</span>
+    <span>⚔️ Weekend Tournament — $50 prize pool — register on Discord</span>
+    <span>🏆 Top 3 Factions win exclusive LEGEND rank this season</span>
+    <span>🎉 500 players online — our biggest milestone yet! thank you!</span>
+  </div>
+</div>
+
+<!-- ── NAV ────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo"><em>Domination</em>Era</a>
+  <ul class="nav-links">
+    <li><a href="#modes">Games</a></li>
+    <li><a href="#ranks">Store</a></li>
+    <li><a href="#vote">Vote</a></li>
+    <li><a href="#join">Join</a></li>
+    <li><a href="#community">Discord</a></li>
+    <li><a href="#">Rules</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-ip-badge" onclick="copyIP()" title="Click to copy IP">
+      <span class="nav-ip-dot"></span>
+      <span class="nav-ip-text">mc.dominationera.site</span>
+    </div>
+    <a href="#community" class="nav-discord">💬 Discord</a>
+    <a href="#join" class="nav-play">▶ Play</a>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────── -->
+<section id="hero">
+  <canvas id="bg-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="nav-ip-dot"></span>
+      Server Online &nbsp;·&nbsp; 347 Players Active
+    </div>
+
+    <h1 class="hero-title">
+      Domination
+      <span>Era</span>
+    </h1>
+
+    <div class="hero-line"></div>
+    <p class="hero-sub">The premier competitive Minecraft network. Conquer game modes, climb the ranks, and dominate every leaderboard.</p>
+
+    <div class="hero-ip">
+      <div class="hero-ip-label">Server IP</div>
+      <div class="hero-ip-value" id="ip-display">mc.dominationera.site</div>
+      <button class="hero-ip-copy" id="copy-btn" onclick="copyIP()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy IP
+      </button>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#join" class="btn-red">▶ How to Join</a>
+      <a href="#ranks" class="btn-ghost">View Ranks & Store</a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"><div class="scroll-arrow"></div></div>
+</section>
+
+<!-- ── STATS BAR ──────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num"><span class="accent">347</span></div>
+    <div class="stat-lbl">Online Now</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">24<span style="font-size:1.1rem;color:var(--text2)">/7</span></div>
+    <div class="stat-lbl">Uptime</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">1.21</div>
+    <div class="stat-lbl">MC Version</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">6</div>
+    <div class="stat-lbl">Game Modes</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">S<span style="color:var(--red)">3</span></div>
+    <div class="stat-lbl">Current Season</div>
+  </div>
+</div>
+
+<!-- ── GAME MODES ─────────────────────────────── -->
+<section id="modes">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow">Choose Your Battle</div>
+      <h2 class="sec-title">Game Modes</h2>
+      <p class="sec-desc">Six arenas. One mission. Prove you belong at the top.</p>
+    </div>
+
+    <div class="modes-grid reveal">
+
+      <div class="mode-card" style="--mode-color:#E63946;">
+        <span class="mode-icon">⚔️</span>
+        <div class="mode-name">Factions</div>
+        <p class="mode-desc">Build your empire, recruit allies, raid enemy bases and claim territory. The only limit is how far you're willing to fight.</p>
+        <span class="mode-pill"><span class="dot"></span> 142 Playing</span>
+      </div>
+
+      <div class="mode-card" style="--mode-color:#3A86FF;">
+        <span class="mode-icon">💎</span>
+        <div class="mode-name">SkyWars</div>
+        <p class="mode-desc">Start on an island in the sky with nothing but your wit. Rush enemies, steal loot, survive longer than everyone else.</p>
+        <span class="mode-pill"><span class="dot"></span> 89 Playing</span>
+      </div>
+
+      <div class="mode-card" style="--mode-color:#FFB700;">
+        <span class="mode-icon">🏹</span>
+        <div class="mode-name">KitPvP</div>
+        <p class="mode-desc">Pick a class and enter pure combat. No economy, no waiting — just skill versus skill every single fight.</p>
+        <span class="mode-pill"><span class="dot"></span> 67 Playing</span>
+      </div>
+
+      <div class="mode-card" style="--mode-color:#9B5DE5;">
+        <span class="mode-icon">🛏️</span>
+        <div class="mode-name">BedWars</div>
+        <p class="mode-desc">Guard your bed, destroy theirs. Team strategy and fast decision-making decide who gets to respawn — and who doesn't.</p>
+        <span class="mode-pill"><span class="dot"></span> 58 Playing</span>
+      </div>
+
+      <div class="mode-card" style="--mode-color:#00D4AA;">
+        <span class="mode-icon">🌿</span>
+        <div class="mode-name">Survival</div>
+        <p class="mode-desc">Land claim, economy, player shops and events. A living world built by the community — join it or build your own corner of it.</p>
+        <span class="mode-pill"><span class="dot"></span> 48 Playing</span>
+      </div>
+
+      <div class="mode-card" style="--mode-color:#FF6B35;">
+        <span class="mode-icon">🎯</span>
+        <div class="mode-name">Practice PvP</div>
+        <p class="mode-desc">1v1 duels, combo training, speed bridging and more. The proving ground where legends get their edge before ranked play.</p>
+        <span class="mode-pill"><span class="dot"></span> 31 Playing</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── RANKS / STORE ──────────────────────────── -->
+<section id="ranks">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow">Support the Server</div>
+      <h2 class="sec-title">Rank Store</h2>
+      <p class="sec-desc">Unlock exclusive perks, cosmetics and in-game advantages. All ranks are permanent, one-time purchases.</p>
+    </div>
+
+    <div class="ranks-grid reveal">
+
+      <!-- VIP -->
+      <div class="rank-card" style="--rank-color:#00D4AA;">
+        <div class="rank-badge">VIP</div>
+        <div class="rank-price"><sup>$</sup>5</div>
+        <div class="rank-period">one-time — permanent</div>
+        <div class="rank-features">
+          <div class="rank-feature"><span class="check">✓</span> VIP chat prefix &amp; colour</div>
+          <div class="rank-feature"><span class="check">✓</span> 2x daily vote rewards</div>
+          <div class="rank-feature"><span class="check">✓</span> Access to /fly in lobby</div>
+          <div class="rank-feature"><span class="check">✓</span> 2 homes per world</div>
+          <div class="rank-feature"><span class="check">✓</span> Particle cosmetics (basic)</div>
+          <div class="rank-feature inactive"><span class="check">✗</span> Custom kill messages</div>
+          <div class="rank-feature inactive"><span class="check">✗</span> Private arena access</div>
+        </div>
+        <a href="#" class="rank-btn" style="color:#000;">Get VIP →</a>
+      </div>
+
+      <!-- MVP (featured) -->
+      <div class="rank-card featured" style="--rank-color:#3A86FF;">
+        <div class="rank-featured-label">Popular</div>
+        <div class="rank-badge">MVP</div>
+        <div class="rank-price"><sup>$</sup>10</div>
+        <div class="rank-period">one-time — permanent</div>
+        <div class="rank-features">
+          <div class="rank-feature"><span class="check">✓</span> MVP chat prefix &amp; glow effect</div>
+          <div class="rank-feature"><span class="check">✓</span> 4x daily vote rewards</div>
+          <div class="rank-feature"><span class="check">✓</span> /fly in all worlds</div>
+          <div class="rank-feature"><span class="check">✓</span> 5 homes per world</div>
+          <div class="rank-feature"><span class="check">✓</span> Full particle &amp; trail cosmetics</div>
+          <div class="rank-feature"><span class="check">✓</span> Custom kill messages</div>
+          <div class="rank-feature inactive"><span class="check">✗</span> Private arena access</div>
+        </div>
+        <a href="#" class="rank-btn" style="color:#fff;">Get MVP →</a>
+      </div>
+
+      <!-- LEGEND -->
+      <div class="rank-card" style="--rank-color:#FFB700;">
+        <div class="rank-badge">Legend</div>
+        <div class="rank-price"><sup>$</sup>20</div>
+        <div class="rank-period">one-time — permanent</div>
+        <div class="rank-features">
+          <div class="rank-feature"><span class="check">✓</span> LEGEND animated prefix</div>
+          <div class="rank-feature"><span class="check">✓</span> 8x daily vote rewards</div>
+          <div class="rank-feature"><span class="check">✓</span> /fly + /speed everywhere</div>
+          <div class="rank-feature"><span class="check">✓</span> Unlimited homes</div>
+          <div class="rank-feature"><span class="check">✓</span> All cosmetics unlocked</div>
+          <div class="rank-feature"><span class="check">✓</span> Custom kill messages</div>
+          <div class="rank-feature"><span class="check">✓</span> Private arena + VIP queue</div>
+        </div>
+        <a href="#" class="rank-btn" style="color:#000;">Get Legend →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ───────────────────────────────── -->
+<section id="features">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow">Why Us</div>
+      <h2 class="sec-title">What Makes Us Different</h2>
+    </div>
+    <div class="features-grid reveal">
+      <div class="feat-card">
+        <div class="feat-num">01</div>
+        <div class="feat-name">Military-Grade Anti-Cheat</div>
+        <p class="feat-desc">Custom anti-cheat engine built in-house — no third-party lag, just silent, real-time detection of hackers before they ruin your game.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">02</div>
+        <div class="feat-name">Zero Lag Infrastructure</div>
+        <p class="feat-desc">Enterprise SSDs, global anycast routing, and DDoS protection running 24/7. We maintain 20 TPS even at peak player loads.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">03</div>
+        <div class="feat-name">Active Staff Team</div>
+        <p class="feat-desc">Real people, fast response. Our moderation team is online daily — ban appeals are reviewed within 24 hours, always.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">04</div>
+        <div class="feat-name">Ranked Seasons</div>
+        <p class="feat-desc">Season 3 is live. Climb the faction, KitPvP and BedWars leaderboards to earn exclusive cosmetics and real prizes every cycle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW TO JOIN ────────────────────────────── -->
+<section id="join">
+  <div class="section-inner">
+    <div class="join-grid">
+      <div>
+        <div class="reveal">
+          <div class="eyebrow">Get In Game</div>
+          <h2 class="sec-title">How to Join</h2>
+          <p class="sec-desc">Three steps. Under sixty seconds. Your first kill is waiting.</p>
+        </div>
+        <div class="steps reveal">
+          <div class="step">
+            <div class="step-n">01</div>
+            <div>
+              <div class="step-title">Open Minecraft Java Edition</div>
+              <p class="step-desc">Launch the official Minecraft launcher. Select version 1.8 or higher — we support everything up to 1.21.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">02</div>
+            <div>
+              <div class="step-title">Add the Server</div>
+              <p class="step-desc">Go to Multiplayer → Add Server and paste the address below. Hit Done.</p>
+              <div class="step-chip">mc.dominationera.site</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">03</div>
+            <div>
+              <div class="step-title">Connect &amp; Dominate</div>
+              <p class="step-desc">Select the server and click Join. Pick your first game mode and start your climb. Every legend started at rank zero.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="join-card">
+          <div class="join-card-header">⚡ Server Information</div>
+          <div class="join-card-body">
+            <div class="join-row">
+              <span class="join-key">Status</span>
+              <span class="join-val online-indicator"><span class="nav-ip-dot"></span> Online</span>
+            </div>
+            <div class="join-row">
+              <span class="join-key">IP Address</span>
+              <span class="join-val" style="font-family:'Fira Code',monospace;font-size:.82rem;color:var(--gold)">mc.dominationera.site</span>
+            </div>
+            <div class="join-row">
+              <span class="join-key">Bedrock Port</span>
+              <span class="join-val" style="font-family:'Fira Code',monospace;font-size:.82rem">19132</span>
+            </div>
+            <div class="join-row">
+              <span class="join-key">Version</span>
+              <span class="join-val">1.8 – 1.21</span>
+            </div>
+            <div class="join-row">
+              <span class="join-key">Platform</span>
+              <span class="join-val">Java + Bedrock</span>
+            </div>
+            <div class="join-row">
+              <span class="join-key">Players Online</span>
+              <span class="join-val" style="color:var(--teal)">347 / 2000</span>
+            </div>
+            <div class="join-row">
+              <span class="join-key">Website</span>
+              <span class="join-val" style="font-family:'Fira Code',monospace;font-size:.8rem">dominationera.site</span>
+            </div>
+          </div>
+          <div class="join-cta-wrap">
+            <button class="join-cta-btn" onclick="copyIP()">📋 Copy Server IP</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VOTE ───────────────────────────────────── -->
+<section id="vote">
+  <div class="section-inner">
+    <div class="vote-inner">
+      <div>
+        <div class="reveal">
+          <div class="eyebrow">Help Us Grow</div>
+          <h2 class="sec-title">Vote for Rewards</h2>
+          <p class="sec-desc">Vote daily on server listing sites to help DominationEra reach more players — and earn in-game rewards for every vote you cast.</p>
+        </div>
+        <div class="vote-sites reveal">
+          <a href="#" class="vote-site">
+            <div>
+              <div class="vote-site-name">Planet Minecraft</div>
+              <div class="vote-site-sub">planetminecraft.com — resets daily</div>
+            </div>
+            <span class="vote-arrow">→</span>
+          </a>
+          <a href="#" class="vote-site">
+            <div>
+              <div class="vote-site-name">Minecraft Server List</div>
+              <div class="vote-site-sub">minecraft-server-list.com — resets daily</div>
+            </div>
+            <span class="vote-arrow">→</span>
+          </a>
+          <a href="#" class="vote-site">
+            <div>
+              <div class="vote-site-name">TopG.org</div>
+              <div class="vote-site-sub">topg.org — resets every 12 hours</div>
+            </div>
+            <span class="vote-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="vote-rewards reveal">
+        <div class="vote-reward-title">Every Vote Earns:</div>
+        <div class="reward-list">
+          <div class="reward-item"><div class="reward-icon">💰</div> 500 in-game coins</div>
+          <div class="reward-item"><div class="reward-icon">🗝️</div> 1 Vote Crate key</div>
+          <div class="reward-item"><div class="reward-icon">⭐</div> 30 minutes of XP boost</div>
+          <div class="reward-item"><div class="reward-icon">🏆</div> Leaderboard vote point (prize pool)</div>
+          <div class="reward-item"><div class="reward-icon">🎁</div> Chance at a random rank upgrade</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMMUNITY ──────────────────────────────── -->
+<section id="community">
+  <div class="community-inner reveal">
+    <div class="eyebrow" style="text-align:center">Join the Movement</div>
+    <h2 class="sec-title" style="font-size:clamp(2rem,5vw,3.4rem)">1,200+ Members on Discord</h2>
+    <p class="sec-desc" style="text-align:center;margin:0 auto 2rem">Get announcements, join tournaments, report bugs and talk to the community. Our Discord is where DominationEra lives between sessions.</p>
+    <div class="community-btns">
+      <a href="#" class="btn-discord">💬 Join Our Discord</a>
+      <a href="#join" class="btn-ghost">How to Play →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name"><em>Domination</em>Era</div>
+      <p class="footer-brand-desc">A competitive Minecraft network built for players who came to win. Join thousands of warriors already fighting for dominance on every leaderboard.</p>
+      <div class="footer-social">
+        <a href="#" class="footer-social-link" title="Discord">💬</a>
+        <a href="#" class="footer-social-link" title="Twitter">𝕏</a>
+        <a href="#" class="footer-social-link" title="YouTube">▶</a>
+        <a href="#" class="footer-social-link" title="TikTok">♪</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Play</div>
+      <ul class="footer-links">
+        <li><a href="#modes">Game Modes</a></li>
+        <li><a href="#ranks">Rank Store</a></li>
+        <li><a href="#vote">Vote</a></li>
+        <li><a href="#">Leaderboards</a></li>
+        <li><a href="#">Season 3 Info</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Community</div>
+      <ul class="footer-links">
+        <li><a href="#">Discord Server</a></li>
+        <li><a href="#">Forums</a></li>
+        <li><a href="#">Staff Team</a></li>
+        <li><a href="#">Apply for Staff</a></li>
+        <li><a href="#">Content Creator</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links">
+        <li><a href="#">Server Rules</a></li>
+        <li><a href="#">Ban Appeals</a></li>
+        <li><a href="#">Bug Reports</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 DominationEra Network. Not affiliated with Mojang or Microsoft.</span>
+    <span class="footer-domain">dominationera.site</span>
+  </div>
+</footer>
+
+<!-- ── TOAST ──────────────────────────────────── -->
+<div class="toast" id="toast">✔ IP Copied to Clipboard</div>
+
+<!-- ── SCRIPTS ────────────────────────────────── -->
+<script>
+/* ── Canvas particle background ── */
+(function(){
+  const c = document.getElementById('bg-canvas');
+  const ctx = c.getContext('2d');
+  let W, H, pts;
+
+  function resize(){
+    W = c.width  = c.parentElement.offsetWidth;
+    H = c.height = c.parentElement.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); init(); });
+
+  function init(){
+    pts = Array.from({length: 70}, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.2 + 0.3,
+      dx: (Math.random() - 0.5) * 0.25,
+      dy: (Math.random() - 0.5) * 0.25,
+      alpha: Math.random() * 0.35 + 0.05,
+    }));
+  }
+  init();
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+
+    /* connecting lines */
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i+1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 140) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(230,57,70,${(1 - d/140) * 0.12})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    /* dots */
+    for (const p of pts) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(230,57,70,${p.alpha})`;
+      ctx.fill();
+
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > W) p.dx *= -1;
+      if (p.y < 0 || p.y > H) p.dy *= -1;
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── Copy IP ── */
+function copyIP() {
+  const ip = 'mc.dominationera.site';
+  navigator.clipboard.writeText(ip).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = ip;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+
+  const btn = document.getElementById('copy-btn');
+  if (btn) { btn.textContent = '✔ Copied!'; btn.classList.add('done'); }
+
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => {
+    if (btn) { btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy IP`; btn.classList.remove('done'); }
+    toast.classList.remove('show');
+  }, 2400);
+}
+
+/* ── Scroll reveal ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.10, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

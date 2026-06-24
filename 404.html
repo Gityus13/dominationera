@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | DominationEra</title>
+<meta name="description" content="DominationEra – the #1 competitive Minecraft network. Join now at mc.dominationera.site">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & BASE ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+:root {
+  --bg:          #06060D;
+  --bg2:         #09091A;
+  --surface:     #0C0C1E;
+  --card:        #0F0F22;
+  --card2:       #13132A;
+  --border:      #1E1E40;
+  --border2:     #2C2C55;
+
+  --red:         #E63946;
+  --red-glow:    rgba(230,57,70,.35);
+  --red-dim:     #6B1A22;
+
+  --gold:        #FFB700;
+  --gold-glow:   rgba(255,183,0,.30);
+  --gold-dim:    #6B4C00;
+
+  --purple:      #9B5DE5;
+  --purple-glow: rgba(155,93,229,.30);
+
+  --teal:        #00D4AA;
+  --teal-glow:   rgba(0,212,170,.25);
+
+  --blue:        #3A86FF;
+  --blue-glow:   rgba(58,134,255,.25);
+
+  --text:        #D0D0E8;
+  --text2:       #9090C0;
+  --white:       #F0F0FF;
+
+  --nav-h:       60px;
+  --ticker-h:    36px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ─── TICKER ──────────────────────────────────── */
+.ticker-wrap {
+  width: 100%;
+  height: var(--ticker-h);
+  background: var(--red);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.ticker-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker-scroll 28s linear infinite;
+}
+.ticker-inner span {
+  display: inline-block;
+  padding: 0 60px;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── NAV ─────────────────────────────────────── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  background: rgba(6,6,13,.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  padding: 0 4%;
+  gap: 2rem;
+}
+.nav-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.nav-logo em { color: var(--red); font-style: normal; }
+
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  margin-left: .5rem;
+}
+.nav-links a {
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text2);
+  transition: color .2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  flex-shrink: 0;
+}
+.nav-ip-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.nav-ip-badge:hover { border-color: var(--red); }
+.nav-ip-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 6px var(--teal);
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+.nav-ip-text {
+  font-family: 'Fira Code', monospace;
+  font-size: .72rem;
+  color: var(--text2);
+}
+.nav-discord {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: #5865F2;
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  transition: background .2s;
+}
+.nav-discord:hover { background: #4752C4; }
+.nav-play {
+  padding: 7px 20px;
+  background: var(--red);
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: background .2s, transform .15s;
+  white-space: nowrap;
+}
+.nav-play:hover { background: #FF4A55; transform: translateY(-1px); }
+
+@media (max-width: 880px) {
+  .nav-links { display: none; }
+}
+
+/* ─── 404 HERO ─────────────────────────────────── */
+#error-hero {
+  position: relative;
+  min-height: calc(100vh - var(--nav-h) - var(--ticker-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 5% 80px;
+  overflow: hidden;
+}
+
+canvas#bg-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#error-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--bg) 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.error-content { position: relative; z-index: 2; max-width: 720px; }
+
+.error-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--red);
+  padding: 5px 16px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1.5rem;
+  background: rgba(230,57,70,.07);
+}
+.error-badge .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red);
+}
+
+.error-code {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(5rem, 18vw, 11rem);
+  font-weight: 700;
+  line-height: .85;
+  letter-spacing: .04em;
+  color: var(--white);
+  margin-bottom: .2rem;
+  text-shadow: 0 0 50px var(--red-glow);
+}
+.error-code span { color: var(--red); }
+
+.error-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.4rem, 3.6vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: .6rem;
+}
+
+.error-line {
+  width: 80px;
+  height: 3px;
+  background: var(--red);
+  margin: 1.2rem auto;
+}
+
+.error-sub {
+  font-size: clamp(.95rem, 2vw, 1.1rem);
+  color: var(--text2);
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+.btn-red {
+  padding: 14px 38px;
+  background: var(--red);
+  color: #fff;
+  font-weight: 700;
+  font-size: .92rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background .2s, transform .15s;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn-red:hover { background: #FF4A55; transform: translateY(-2px); }
+.btn-ghost {
+  padding: 14px 38px;
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  font-size: .92rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  display: inline-block;
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--red); color: var(--red); }
+
+/* quick links */
+.error-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  border: 1px solid var(--border2);
+  background: var(--border);
+  gap: 1px;
+}
+.error-links a {
+  background: var(--card);
+  padding: 14px 22px;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text2);
+  transition: background .2s, color .2s;
+}
+.error-links a:hover { background: var(--card2); color: var(--white); }
+
+/* ─── FOOTER (minimal) ─────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: 28px 5%;
+  text-align: center;
+}
+.footer-copy {
+  font-size: .78rem;
+  color: var(--text2);
+}
+.footer-brand-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: .4rem;
+}
+.footer-brand-name em { color: var(--red); font-style: normal; }
+
+@media (max-width: 600px) {
+  .error-links { flex-direction: column; width: 100%; max-width: 320px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── TICKER ─────────────────────────────────── -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span>🔥 Season 3 is NOW LIVE — new maps, new weapons &amp; exclusive cosmetics</span>
+    <span>⚔️ Weekend Tournament — $50 prize pool — register on Discord</span>
+    <span>🏆 Top 3 Factions win exclusive LEGEND rank this season</span>
+    <span>🎉 500 players online — our biggest milestone yet! thank you!</span>
+    <span>🔥 Season 3 is NOW LIVE — new maps, new weapons &amp; exclusive cosmetics</span>
+    <span>⚔️ Weekend Tournament — $50 prize pool — register on Discord</span>
+    <span>🏆 Top 3 Factions win exclusive LEGEND rank this season</span>
+    <span>🎉 500 players online — our biggest milestone yet! thank you!</span>
+  </div>
+</div>
+
+<!-- ── NAV ────────────────────────────────────── -->
+<nav>
+  <a href="/" class="nav-logo"><em>Domination</em>Era</a>
+  <ul class="nav-links">
+    <li><a href="/#modes">Games</a></li>
+    <li><a href="/#ranks">Store</a></li>
+    <li><a href="/#vote">Vote</a></li>
+    <li><a href="/#join">Join</a></li>
+    <li><a href="/#community">Discord</a></li>
+    <li><a href="/#">Rules</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-ip-badge" onclick="copyIP()" title="Click to copy IP">
+      <span class="nav-ip-dot"></span>
+      <span class="nav-ip-text">mc.dominationera.site</span>
+    </div>
+    <a href="/#community" class="nav-discord">💬 Discord</a>
+    <a href="/#join" class="nav-play">▶ Play</a>
+  </div>
+</nav>
+
+<!-- ── 404 HERO ───────────────────────────────── -->
+<section id="error-hero">
+  <canvas id="bg-canvas"></canvas>
+  <div class="error-content">
+    <div class="error-badge"><span class="dot"></span> Lost in the Void</div>
+
+    <div class="error-code">4<span>0</span>4</div>
+    <div class="error-title">This Page Doesn't Exist</div>
+
+    <div class="error-line"></div>
+    <p class="error-sub">Looks like you wandered off the map. The page you're looking for has been moved, removed, or never existed — even on a server this big.</p>
+
+    <div class="error-actions">
+      <a href="/" class="btn-red">▶ Back to Base</a>
+      <a href="/#join" class="btn-ghost">How to Join</a>
+    </div>
+
+    <div class="error-links">
+      <a href="/#modes">Game Modes</a>
+      <a href="/#ranks">Rank Store</a>
+      <a href="/#vote">Vote</a>
+      <a href="/#community">Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+  <div class="footer-brand-name"><em>Domination</em>Era</div>
+  <span class="footer-copy">&copy; 2025 DominationEra Network. Not affiliated with Mojang or Microsoft.</span>
+</footer>
+
+<!-- ── TOAST ──────────────────────────────────── -->
+<div class="toast" id="toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--card2);border:1px solid var(--teal);color:var(--white);padding:12px 24px;font-size:.85rem;font-weight:600;opacity:0;pointer-events:none;transition:opacity .25s, transform .25s;z-index:999;">✔ IP Copied to Clipboard</div>
+
+<!-- ── SCRIPTS ────────────────────────────────── -->
+<script>
+/* ── Canvas particle background ── */
+(function(){
+  const c = document.getElementById('bg-canvas');
+  const ctx = c.getContext('2d');
+  let W, H, pts;
+
+  function resize(){
+    W = c.width  = c.parentElement.offsetWidth;
+    H = c.height = c.parentElement.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); init(); });
+
+  function init(){
+    pts = Array.from({length: 60}, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.2 + 0.3,
+      dx: (Math.random() - 0.5) * 0.25,
+      dy: (Math.random() - 0.5) * 0.25,
+      alpha: Math.random() * 0.35 + 0.05,
+    }));
+  }
+  init();
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i+1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 140) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(230,57,70,${(1 - d/140) * 0.12})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    for (const p of pts) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(230,57,70,${p.alpha})`;
+      ctx.fill();
+
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > W) p.dx *= -1;
+      if (p.y < 0 || p.y > H) p.dy *= -1;
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── Copy IP ── */
+function copyIP() {
+  const ip = 'mc.dominationera.site';
+  navigator.clipboard.writeText(ip).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = ip;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+
+  const toast = document.getElementById('toast');
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(20px)';
+  }, 2400);
+}
+</script>
+</body>
+</html>
